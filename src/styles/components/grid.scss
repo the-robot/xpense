@@ -1,0 +1,91 @@
+@import '../index.scss';
+
+/*
+ * Custom Grid System like Bootstrap
+ */
+
+.container {
+  width: 100%;
+}
+.container *{
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+}
+.row:before,
+.row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+@media all and (max-width: $mobile) {
+  .row {
+    display: block;
+  }
+}
+
+.col {
+  float: left;
+
+  // dimension
+  min-height: 1px;
+  // max 6 columns in a row
+  width: 16.66%;
+
+  // gutter (padding between columns)
+  padding: 12px;
+
+  &_xs {
+    @extend .col;
+    // max 6 columns in a row
+    width: 16.66%;
+  }
+
+  &_sm {
+    @extend .col;
+    // max 3 columns in a row
+    width: 33.33%;
+  }
+
+  &_md {
+    @extend .col;
+    // max 2 columns in a row
+    width: 50%;
+  }
+
+  &_lg {
+    @extend .col;
+    // max 1 column in a row
+    width: 100%;
+  }
+
+  // special class that will fill the remaining columns in a row
+  &_fill {
+    @extend .col;
+    flex-grow: 100;
+  }
+
+  @media all and (max-width: $mobile) {
+    &_xs {
+      width: 50%;
+    }
+
+    &_sm {
+      width: 100%;
+    }
+
+    &_md {
+      width: 100%;
+    }
+
+    &_lg{
+      width: 100%;
+    }
+
+    &_fill {
+      width: 100%;
+    }
+  }
+}

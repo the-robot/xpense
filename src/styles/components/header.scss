@@ -1,0 +1,27 @@
+@import '../index.scss';
+
+.container {
+  text-align: center;
+}
+
+.header {
+  background-color: $primary-accent-color;
+
+  // margin and padding
+  padding-bottom: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 15px;
+}
+
+.title {
+  margin-top: 20px;
+
+  &_name {
+    margin: 0px;
+
+    // text
+    font-size: 42px;
+    font-weight: 450;
+  }
+}
