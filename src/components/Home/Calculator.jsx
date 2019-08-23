@@ -264,7 +264,7 @@ class Calculator extends Component {
 
       calculate,
     } = this;
-    const { indvExpenses, groupExpenses, promos, people } = this.state;
+    const { indvExpenses, groupExpenses, promos, people, splitExpenses } = this.state;
 
     // Button State
     const disabledCalc = !(people && people.trim())
@@ -407,8 +407,15 @@ class Calculator extends Component {
                 buttonStyle={style.calculator_calcButton}
                 callback={calculate}
                 disabled={disabledCalc}
-                text={'Split Expense'}
+                text={'Split Expenses'}
               />
+            </div>
+
+            {/* Result */}
+            <div
+              className={grid.fill}
+            >
+              <p> Hello </p>
             </div>
           </div>
         </div>
