@@ -97,7 +97,7 @@ class Calculator extends Component {
           amount: ''
         },
       ],
-      sharedExpenses: [
+      groupExpenses: [
         {
           name: '',
           amount: ''
@@ -128,19 +128,19 @@ class Calculator extends Component {
     this.setState({ indvExpenses });
   };
 
-  addSharedExpense = () => {
-    const { sharedExpenses } = this.state;
-    const lastItem = sharedExpenses[sharedExpenses.length - 1];
+  addGroupExpense = () => {
+    const { groupExpenses } = this.state;
+    const lastItem = groupExpenses[groupExpenses.length - 1];
     // if last item name and amount is empty; do not add new
     if (!lastItem.name.trim() && !lastItem.amount.trim()) {
       return;
     }
     // add new input fields
-    sharedExpenses.push({
+    groupExpenses.push({
       name: '',
       amount: '',
     });
-    this.setState({ sharedExpenses });
+    this.setState({ groupExpenses });
   };
 
   addPromo = () => {
@@ -165,11 +165,11 @@ class Calculator extends Component {
     this.setState({ indvExpenses });
   };
 
-  setSharedExpense = (index, name, amount) => {
-    const { sharedExpenses } = this.state;
-    sharedExpenses[index].name = name;
-    sharedExpenses[index].amount = amount;
-    this.setState({ sharedExpenses });
+  setGroupExpense = (index, name, amount) => {
+    const { groupExpenses } = this.state;
+    groupExpenses[index].name = name;
+    groupExpenses[index].amount = amount;
+    this.setState({ groupExpenses });
   };
 
   setPromo = (index, name, amount) => {
@@ -192,17 +192,17 @@ class Calculator extends Component {
   render() {
     const {
       addIndvExpense,
-      addSharedExpense,
+      addGroupExpense,
       addPromo,
 
       setIndvExpense,
-      setSharedExpense,
+      setGroupExpense,
       setPromo,
       setPeople,
 
       calculate,
     } = this;
-    const { indvExpenses, sharedExpenses, promos, people } = this.state;
+    const { indvExpenses, groupExpenses, promos, people } = this.state;
 
     // Icon
     const addIcon = <FontAwesomeIcon
@@ -229,7 +229,7 @@ class Calculator extends Component {
         value2={input.amount}
       />;
     });
-    const SharedExpenses = sharedExpenses.map((input, index) => {
+    const GroupExpenses = groupExpenses.map((input, index) => {
       let field1 = {
         type: 'text',
         placeholder: 'name',
@@ -239,11 +239,11 @@ class Calculator extends Component {
         placeholder: 'amount',
       };
       return <AmountInput
-        key={`sharedExp${index}`}
+        key={`gpExp${index}`}
         index={index}
         field1={field1}
         field2={field2}
-        setBack={setSharedExpense}
+        setBack={setGroupExpense}
         value1={input.name}
         value2={input.amount}
       />;
@@ -288,17 +288,17 @@ class Calculator extends Component {
               {IndividualExpenses}
             </div>
 
-            {/* Shared Expenses */}
+            {/* Group Expenses */}
             <div className={`${grid.col_sm} ${style.calculator_container}`}>
               <div className={style.calculator_header}>
-                <p className={style.calculator_title}>Shared Expenses</p>
+                <p className={style.calculator_title}>Group Expenses</p>
                 <IconButton
                   buttonStyle={style.calculator_button}
-                  callback={addSharedExpense}
+                  callback={addGroupExpense}
                   icon={addIcon}
                 />
               </div>
-              {SharedExpenses}
+              {GroupExpenses}
             </div>
 
             {/* Promos */}
