@@ -1,20 +1,95 @@
 @import '../../index.scss';
 
+.button {
+  background-color: $grey-2;
+  width: 250px;
+
+  // margin and padding
+  margin: 0 auto;
+  margin-top: 15px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+
+  // text
+  text-align: center;
+}
 @media all and (max-width: $mobile) {
-  .col {
-    width: 50%;
+  .button {
+    margin-left: 0;
+    width: 98%;
   }
 }
 
-.button {
-  margin: 0 auto;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  width: 50%;
+.col {
+  text-align: left;
+
+  // margin and padding
+  margin-bottom: 4px;
+  margin-top: 4px;
+  padding-top: 0;
+  padding-bottom: 0;
+
+  overflow: auto;
+
+  &_amount {
+    text-align: right;
+    padding-right: 5%;
+    width: 30%;
+  }
+
+  &_name {
+    padding-left: 5%;
+    width: 70%;
+  }
+
+  p {
+    margin: 5px;
+  }
 }
 
 .container {
-  max-width: 650px;
+  width: 350px;
+}
+@media all and (max-width: $mobile) {
+  .container {
+    width: 95%;
+  }
+}
+
+.header {
+  &_text {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+}
+@media all and (max-width: $mobile) {
+  .header {
+    text-align: left;
+  }
+}
+
+.result {
+  background-color: $black-2;
+  border-radius: 10px;
+}
+
+.row {
+  border-bottom: 1px solid $black-3;
+
+  &_noBorder {
+    border-bottom: 0px solid $black-2;
+  }
+}
+
+.text {
+  font-size: 18px;
+
+  &_bold {
+    @extend .text;
+    color: $red-2;
+    font-weight: bold;
+  }
 }
 
 .title {

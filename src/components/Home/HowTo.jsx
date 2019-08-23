@@ -15,7 +15,7 @@ import variables from '../../styles/index.scss';
 
 const HowTo = props => {
   return (
-    <div>
+    <div className={style.howto}>
       {/* How To */}
       <div className={style.title}>
         <p className={style.title_text}>How To</p>

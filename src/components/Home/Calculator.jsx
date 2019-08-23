@@ -26,18 +26,18 @@ class AmountInput extends PureComponent {
   onInput1Change = value1 => {
     const { setStateInParent } = this;
     this.setState({ value1 }, setStateInParent);
-  }
+  };
 
   onInput2Change = value2 => {
     const { setStateInParent } = this;
     this.setState({ value2 }, setStateInParent);
-  }
+  };
 
   setStateInParent = () => {
     const { value1, value2 } = this.state;
     const { index, setBack } = this.props;
     setBack(index, value1, value2);
-  }
+  };
 
   render() {
     const { onInput1Change, onInput2Change } = this;
@@ -92,88 +92,21 @@ class Calculator extends Component {
     super(props);
 
     this.state = {
-      indvExpenses: [
-        {
-          name: 'A',
-          amount: '2.7'
-        },
-        {
-          name: 'B',
-          amount: '3.2'
-        },
-        {
-          name: 'C',
-          amount: '3.5'
-        },
-        {
-          name: 'D',
-          amount: '3.8'
-        },
-        {
-          name: 'E',
-          amount: '5.9'
-        },
-        {
-          name: 'F',
-          amount: '3.7'
-        },
-        {
-          name: 'G',
-          amount: '4.6'
-        },
-        {
-          name: 'H',
-          amount: '3.5'
-        },
-      ],
-      groupExpenses: [
-        {
-          name: 'Delivery',
-          amount: '5'
-        },
-      ],
-      promos: [
-        {
-          name: 'Discount',
-          amount: '9.3'
-        },
-      ],
-      people: '8',
-      splitExpenses: [
-        {
-          name: 'A',
-          amount: '2.7'
-        },
-        {
-          name: 'B',
-          amount: '3.2'
-        },
-        {
-          name: 'C',
-          amount: '3.5'
-        },
-        {
-          name: 'D',
-          amount: '3.8'
-        },
-        {
-          name: 'E',
-          amount: '5.9'
-        },
-        {
-          name: 'F',
-          amount: '3.7'
-        },
-        {
-          name: 'G',
-          amount: '4.6'
-        },
-        {
-          name: 'H',
-          amount: '3.5'
-        },
-      ],
-      showResult: true,
+      indvExpenses: [{
+        name: '',
+        amount: '',
+     }],
+      groupExpenses: [{
+          name: '',
+          amount: '',
+      }],
+      promos: [{
+        name: '',
+        amount: '',
+      }],
+      people: '',
+      splitExpenses: [],
+      showResult: false,
     };
   }
 
@@ -181,7 +114,7 @@ class Calculator extends Component {
     const { indvExpenses } = this.state;
     const lastItem = indvExpenses[indvExpenses.length - 1];
     // if last item name and amount is empty; do not add new
-    if (!lastItem.name.trim() && !lastItem.amount.trim()) {
+    if (indvExpenses.length !== 0 && (!lastItem.name.trim() && !lastItem.amount.trim())) {
       return;
     }
     // add new input fields
@@ -196,7 +129,7 @@ class Calculator extends Component {
     const { groupExpenses } = this.state;
     const lastItem = groupExpenses[groupExpenses.length - 1];
     // if last item name and amount is empty; do not add new
-    if (!lastItem.name.trim() && !lastItem.amount.trim()) {
+    if (groupExpenses.length !== 0 && (!lastItem.name.trim() && !lastItem.amount.trim())) {
       return;
     }
     // add new input fields
@@ -211,7 +144,7 @@ class Calculator extends Component {
     const { promos } = this.state;
     const lastItem = promos[promos.length - 1];
     // if last item name and amount is empty; do not add new
-    if (!lastItem.name.trim() && !lastItem.amount.trim()) {
+    if (promos.length !== 0 && (!lastItem.name.trim() && !lastItem.amount.trim())) {
       return;
     }
     // add new input fields
@@ -267,19 +200,27 @@ class Calculator extends Component {
     const gpExpAftSplit = gpExpTotal / ppl;
     const promoAmtAftSplit = promoAmt / ppl;
     let totalAmt = 0;
-    let indvAftSplit = indvExpenses.map(input => {
+    // filter empty records, then calculate
+    let indvAftSplit = indvExpenses.filter(input => {
+      if (!input.amount && !input.amount.trim()) {
+        return false;
+      }
+      return true;
+    }).map(input => {
       // store total amount
+      // if negative, set to 0
       let amt = input.amount && input.amount.trim() ? parseFloat(input.amount) + gpExpAftSplit - promoAmtAftSplit : 0
+      amt = amt < 0 ? 0 : amt;
       totalAmt += amt
       return {
         name: input.name,
-        amount: amt,
+        amount: amt.toFixed(2),
       };
     });
     // save total amount to state also
     indvAftSplit.push({
       name: 'Total',
-      amount: totalAmt,
+      amount: totalAmt.toFixed(2),
     });
     this.setState({
       splitExpenses: indvAftSplit,
@@ -292,18 +233,28 @@ class Calculator extends Component {
       addIndvExpense,
       addGroupExpense,
       addPromo,
-
       setIndvExpense,
       setGroupExpense,
       setPromo,
       setPeople,
-
       calculate,
     } = this;
-    const { indvExpenses, groupExpenses, promos, people, showResult, splitExpenses } = this.state;
+    const {
+      groupExpenses,
+      indvExpenses,
+      people,
+      promos,
+      showResult,
+      splitExpenses
+    } = this.state;
 
     // Button State
-    const disabledCalc = !(people && people.trim())
+    const disabledCalc = !(
+      people &&
+      people.trim() &&
+      Number.isInteger(parseInt(people)) &&
+      parseInt(people) > 0
+    );
   
     // Icon
     const addIcon = <FontAwesomeIcon
@@ -399,62 +350,69 @@ class Calculator extends Component {
               {IndividualExpenses}
             </div>
 
-            {/* Group Expenses */}
-            <div className={`${grid.col_sm} ${style.calculator_container}`}>
-              <div className={style.calculator_header}>
-                <p className={style.calculator_title}>Group Expenses</p>
-                <IconButton
-                  buttonStyle={style.calculator_button}
-                  callback={addGroupExpense}
-                  icon={addIcon}
-                />
-              </div>
-              {GroupExpenses}
-            </div>
+            <div className={`${grid.col_fill}`} style={{ padding: 0 }}>
+              <div className={`${grid.container} ${style.container_grid}`}>
+                {/* Group Expense & Promo row */}
+                <div className={grid.row}>
+                  {/* Group Expenses */}
+                  <div className={`${grid.col_fill} ${style.calculator_container}`}>
+                    <div className={style.calculator_header}>
+                      <p className={style.calculator_title}>Group Expenses</p>
+                      <IconButton
+                        buttonStyle={style.calculator_button}
+                        callback={addGroupExpense}
+                        icon={addIcon}
+                      />
+                    </div>
+                    {GroupExpenses}
+                  </div>
 
-            {/* Promos */}
-            <div className={`${grid.col_sm} ${style.calculator_container}`}>
-              <div className={style.calculator_header}>
-                <p className={style.calculator_title}>Promos</p>
-                <IconButton
-                  buttonStyle={style.calculator_button}
-                  callback={addPromo}
-                  icon={addIcon}
-                />
+                  {/* Promos */}
+                  <div className={`${grid.col_fill} ${style.calculator_container}`}>
+                    <div className={style.calculator_header}>
+                      <p className={style.calculator_title}>Promos</p>
+                      <IconButton
+                        buttonStyle={style.calculator_button}
+                        callback={addPromo}
+                        icon={addIcon}
+                      />
+                    </div>
+                    {Promos}
+                  </div>
+                </div>
+
+                {/* No. of People */}
+                <div className={grid.row}>
+                  <div
+                    className={`${grid.col_lg} ${style.calculator_container}`}
+                    style={{ paddingTop: 0, marginTop: '-1px' }}
+                  >
+                    <div className={style.calculator_input}>
+                      <p className={style.calculator_title}>No. of Ppl</p>
+                      <input
+                        className={style.calculator_input_people}
+                        onChange={evt => setPeople(evt.target.value)}
+                        placeholder={'no. of ppl'}
+                        type='number'
+                        value={people}
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
-              {Promos}
             </div>
           </div>
         </div>
 
         <div className={`${grid.container} ${style.container_grid}`}>
           <div className={grid.row}>
-            {/* No. People */}
-            <div className={`${grid.col_sm} ${style.calculator_container}`}>
-              <div className={style.calculator_input}>
-                <p className={style.calculator_title}>No. of People</p>
-                <input
-                  className={style.calculator_input_people}
-                  onChange={evt => setPeople(evt.target.value)}
-                  placeholder={'no. of people'}
-                  type='number'
-                  value={people}
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className={grid.row}>
             {/* Caculate Button */}
-            <div
-              className={`${grid.col_sm} ${style.calculator_container}`}
-              style={{ paddingLeft: '15px' }}
-            >
+            <div className={grid.col_lg} style={{ paddingLeft: '15px' }}>
               <Button
                 buttonStyle={style.calculator_calcButton}
                 callback={calculate}
                 disabled={disabledCalc}
-                text={'Split Expenses'}
+                text={'Split'}
               />
             </div>
           </div>

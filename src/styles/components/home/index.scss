@@ -8,7 +8,7 @@
 
     // margin and padding
     margin-right: 6.5%;
-    margin-top: 5px;
+    margin-top: 3px;
 
     &_icon {
       width: 14px;
@@ -22,17 +22,19 @@
   
   &_calcButton {
     background-color: $green-1;
-    width: 92%;
+    width: 250px;
 
     // margin and padding
+    margin: 0 auto;
     padding-bottom: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
     padding-top: 20px;
+
+    // text
+    text-align: center;
   }
   @media all and (max-width: $mobile) {
     &_calcButton {
-      text-align: center;
+      margin-left: 0;
       width: 98%;
     }
   }
@@ -55,14 +57,18 @@
     }
 
     &_people {
-      width: 92.5% !important;
+      // half col width
+      width: 45% !important;
+      // full col width
+      // width: 96.5% !important;
+      display: block;
     }
     &_people:focus {
       margin-bottom: 12px !important;
     }
     @media all and (max-width: $mobile) {
       &_people {
-        width: 98% !important;
+        width: 100% !important;
       }
     }
   }
@@ -129,6 +135,10 @@
   &_grid {
     margin-top: 0px;
   }
+}
+
+.howto {
+  max-width: 98%;
 }
 
 .icon {
