@@ -1,7 +1,7 @@
 import React, { Component, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import { IconButton } from '../Common';
+import { Button, IconButton } from '../Common';
 
 // icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,7 +12,7 @@ import grid from '../../styles/components/grid.scss';
 import style from '../../styles/components/home.scss';
 
 
-class Input extends PureComponent {
+class AmountInput extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -64,7 +64,7 @@ class Input extends PureComponent {
   }
 }
 
-Input.propTypes = {
+AmountInput.propTypes = {
   index: PropTypes.number.isRequired,
   field1: PropTypes.shape({
     type: PropTypes.string,
@@ -109,7 +109,7 @@ class Calculator extends Component {
           amount: ''
         },
       ],
-      people: [],
+      people: '',
     };
   }
 
@@ -141,7 +141,7 @@ class Calculator extends Component {
       amount: '',
     });
     this.setState({ sharedExpenses });
-  }
+  };
 
   addPromo = () => {
     const { promos } = this.state;
@@ -156,39 +156,53 @@ class Calculator extends Component {
       amount: '',
     });
     this.setState({ promos });
-  }
+  };
 
   setIndvExpense = (index, name, amount) => {
     const { indvExpenses } = this.state;
     indvExpenses[index].name = name;
     indvExpenses[index].amount = amount;
     this.setState({ indvExpenses });
-  }
+  };
 
   setSharedExpense = (index, name, amount) => {
     const { sharedExpenses } = this.state;
     sharedExpenses[index].name = name;
     sharedExpenses[index].amount = amount;
     this.setState({ sharedExpenses });
-  }
+  };
 
   setPromo = (index, name, amount) => {
     const { promos } = this.state;
     promos[index].name = name;
     promos[index].amount = amount;
     this.setState({ promos });
-  }
+  };
+
+  setPeople = value => {
+    this.setState({
+      people: value,
+    });
+  };
+
+  calculate = () => {
+    alert('Calculate');
+  };
 
   render() {
     const {
       addIndvExpense,
       addSharedExpense,
       addPromo,
+
       setIndvExpense,
       setSharedExpense,
       setPromo,
+      setPeople,
+
+      calculate,
     } = this;
-    const { indvExpenses, sharedExpenses, promos } = this.state;
+    const { indvExpenses, sharedExpenses, promos, people } = this.state;
 
     // Icon
     const addIcon = <FontAwesomeIcon
@@ -205,7 +219,7 @@ class Calculator extends Component {
         type: 'number',
         placeholder: 'amount',
       };
-      return <Input
+      return <AmountInput
         key={`idvExp${index}`}
         index={index}
         field1={field1}
@@ -224,7 +238,7 @@ class Calculator extends Component {
         type: 'number',
         placeholder: 'amount',
       };
-      return <Input
+      return <AmountInput
         key={`sharedExp${index}`}
         index={index}
         field1={field1}
@@ -243,7 +257,7 @@ class Calculator extends Component {
         type: 'number',
         placeholder: 'amount',
       };
-      return <Input
+      return <AmountInput
         key={`promo${index}`}
         index={index}
         field1={field1}
@@ -298,6 +312,37 @@ class Calculator extends Component {
                 />
               </div>
               {Promos}
+            </div>
+          </div>
+        </div>
+
+        <div className={`${grid.container} ${style.container_grid}`}>
+          <div className={grid.row}>
+            {/* No. People */}
+            <div className={`${grid.col_sm} ${style.calculator_container}`}>
+              <div className={style.calculator_input}>
+                <input
+                  className={style.calculator_input_people}
+                  onChange={evt => setPeople(evt.target.value)}
+                  placeholder={'no. of people'}
+                  type='number'
+                  value={people}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className={grid.row}>
+            {/* Caculate Button */}
+            <div
+              className={`${grid.col_sm} ${style.calculator_container}`}
+              style={{ paddingTop: 0, paddingLeft: '15px' }}
+            >
+              <Button
+                buttonStyle={style.calculator_calcButton}
+                callback={calculate}
+                text={'Split Expense'}
+              />
             </div>
           </div>
         </div>

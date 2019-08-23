@@ -19,9 +19,24 @@
       margin-right: 20px;
     }
   }
+  
+  &_calcButton {
+    background-color: $green-1;
+    width: 92%;
+
+    // margin and padding
+    padding-bottom: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 25px;
+  }
+  @media all and (max-width: $mobile) {
+    &_calcButton {
+      text-align: center;
+    }
+  }
 
   &_container {
-    padding-bottom: 25px;
     text-align: left;
   }
 
@@ -36,6 +51,13 @@
 
     &_right {
       margin-left: 5px;
+    }
+
+    &_people {
+      width: 92.5% !important;
+    }
+    &_people:focus {
+      margin-bottom: 12px !important;
     }
   }
 
