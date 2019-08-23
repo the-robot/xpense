@@ -2,6 +2,7 @@ import React, { Component, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import { Button, IconButton } from '../Common';
+import Result from './Result';
 
 // icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -139,6 +140,7 @@ class Calculator extends Component {
       ],
       people: '8',
       splitExpenses: [],
+      showResult: false,
     };
   }
 
@@ -248,6 +250,7 @@ class Calculator extends Component {
     });
     this.setState({
       splitExpenses: indvAftSplit,
+      showResult: true,
     });
   };
 
@@ -264,7 +267,7 @@ class Calculator extends Component {
 
       calculate,
     } = this;
-    const { indvExpenses, groupExpenses, promos, people, splitExpenses } = this.state;
+    const { indvExpenses, groupExpenses, promos, people, showResult, splitExpenses } = this.state;
 
     // Button State
     const disabledCalc = !(people && people.trim())
@@ -332,6 +335,11 @@ class Calculator extends Component {
         value2={input.amount}
       />;
     });
+
+    // if show result, hide calculator
+    if (showResult) {
+      return <Result />
+    }
 
     return (
       <div className={style.calculator}>
@@ -410,16 +418,6 @@ class Calculator extends Component {
                 disabled={disabledCalc}
                 text={'Split Expenses'}
               />
-            </div>
-          </div>
-
-          <div className={grid.row}>
-            {/* Result */}
-            <div
-              className={`${grid.col_sm} ${style.calculator_container}`}
-              style={{ paddingTop: 0, paddingLeft: '15px' }}
-            >
-              <p>Calculated Amount</p>
             </div>
           </div>
         </div>

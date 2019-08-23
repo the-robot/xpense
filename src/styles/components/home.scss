@@ -7,11 +7,16 @@
     right: 0;
 
     // margin and padding
-    margin-right: 2%;
+    margin-right: 6.5%;
     margin-top: 5px;
 
     &_icon {
       width: 14px;
+    }
+  }
+  @media all and (max-width: $mobile) {
+    &_button {
+      margin-right: 2%;
     }
   }
   
