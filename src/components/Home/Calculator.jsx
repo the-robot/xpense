@@ -93,23 +93,52 @@ class Calculator extends Component {
     this.state = {
       indvExpenses: [
         {
-          name: '',
-          amount: ''
+          name: 'A',
+          amount: '2.7'
+        },
+        {
+          name: 'B',
+          amount: '3.2'
+        },
+        {
+          name: 'C',
+          amount: '3.5'
+        },
+        {
+          name: 'D',
+          amount: '3.8'
+        },
+        {
+          name: 'E',
+          amount: '5.9'
+        },
+        {
+          name: 'F',
+          amount: '3.7'
+        },
+        {
+          name: 'F',
+          amount: '4.6'
+        },
+        {
+          name: 'G',
+          amount: '3.5'
         },
       ],
       groupExpenses: [
         {
-          name: '',
-          amount: ''
+          name: 'Delivery',
+          amount: '5'
         },
       ],
       promos: [
         {
-          name: '',
-          amount: ''
+          name: 'Discount',
+          amount: '9.3'
         },
       ],
-      people: '',
+      people: '8',
+      splitExpenses: [],
     };
   }
 
@@ -186,7 +215,40 @@ class Calculator extends Component {
   };
 
   calculate = () => {
-    alert('Calculate');
+    const { indvExpenses, groupExpenses, promos, people } = this.state;
+    // calculate group expenses total
+    let gpExpTotal = 0;
+    for (let i = 0; i < groupExpenses.length; i += 1) {
+      gpExpTotal += groupExpenses[i].amount && groupExpenses[i].amount.trim() ? parseFloat(groupExpenses[i].amount) : 0;
+    }
+    // calculate promo total
+    let promoAmt = 0;
+    for (let i = 0; i < promos.length; i += 1) {
+      promoAmt += promos[i].amount && promos[i].amount.trim() ? parseFloat(promos[i].amount) : 0;
+    }
+    const ppl = people && people.trim() ? parseInt(people) : 1;
+
+    // do calculation
+    const gpExpAftSplit = gpExpTotal / ppl;
+    const promoAmtAftSplit = promoAmt / ppl;
+    let totalAmt = 0;
+    let indvAftSplit = indvExpenses.map(input => {
+      // store total amount
+      amt = input.amount && input.amount.trim() ? parseFloat(input.amount) + gpExpAftSplit - promoAmtAftSplit : 0
+      totalAmt += amt
+      return {
+        name: input.name,
+        amount: amt,
+      };
+    });
+    // save total amount to state also
+    indvAftSplit.push({
+      name: 'Total',
+      amount: totalAmt,
+    });
+    this.setState({
+      splitExpenses: indvAftSplit,
+    });
   };
 
   render() {
@@ -204,6 +266,9 @@ class Calculator extends Component {
     } = this;
     const { indvExpenses, groupExpenses, promos, people } = this.state;
 
+    // Button State
+    const disabledCalc = !(people && people.trim())
+  
     // Icon
     const addIcon = <FontAwesomeIcon
       className={style.calculator_button_icon}
@@ -341,6 +406,7 @@ class Calculator extends Component {
               <Button
                 buttonStyle={style.calculator_calcButton}
                 callback={calculate}
+                disabled={disabledCalc}
                 text={'Split Expense'}
               />
             </div>
