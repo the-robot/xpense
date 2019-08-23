@@ -7,13 +7,6 @@ import { Button } from '../Common';
 import grid from '../../styles/components/grid.scss';
 import style from '../../styles/components/home/result.scss';
 
-/* 
-{
-  name: 'A',
-  amount: '2.7'
-},
- */
-
 const Result = props => {
   const { goBack, expenses } = props;
   const expenseComponents = expenses.map((expense, index) => {
