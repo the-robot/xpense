@@ -19,7 +19,7 @@ class AmountInput extends PureComponent {
     this.state = {
       value1: props.value1,
       value2: props.value2,
-    }
+    };
   }
 
   onInput1Change = value1 => {
@@ -117,11 +117,11 @@ class Calculator extends Component {
           amount: '3.7'
         },
         {
-          name: 'F',
+          name: 'G',
           amount: '4.6'
         },
         {
-          name: 'G',
+          name: 'H',
           amount: '3.5'
         },
       ],
@@ -234,7 +234,7 @@ class Calculator extends Component {
     let totalAmt = 0;
     let indvAftSplit = indvExpenses.map(input => {
       // store total amount
-      amt = input.amount && input.amount.trim() ? parseFloat(input.amount) + gpExpAftSplit - promoAmtAftSplit : 0
+      let amt = input.amount && input.amount.trim() ? parseFloat(input.amount) + gpExpAftSplit - promoAmtAftSplit : 0
       totalAmt += amt
       return {
         name: input.name,

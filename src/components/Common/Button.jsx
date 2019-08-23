@@ -7,7 +7,10 @@ import style from '../../styles/components/common/button.scss';
 const Button = props => {
   const { buttonStyle, callback, disabled, text } = props;
   return (
-    <div className={`${style.button} ${buttonStyle}`} onClick={disabled ? () => {} : callback}>
+    <div
+      className={`${style.button} ${buttonStyle} ${disabled ? style.button_disabled : ''}`}
+      onClick={disabled ? () => {} : callback}
+    >
       <p>{text}</p>
     </div>
   );
