@@ -1,3 +1,4 @@
+import IconButton from './IconButton';
 import Card from './Card';
 
-export { Card };
+export { IconButton, Card };

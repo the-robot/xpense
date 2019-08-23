@@ -1,0 +1,30 @@
+@import '../../index.scss';
+
+.container {
+  background-color: $blue-1;
+  border-radius: 10px;
+  overflow: auto;
+  position: relative;
+  text-align: left;
+
+  // margin and padding
+  margin-top: 0px;
+  padding-bottom: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 25px;
+
+  p {
+    margin: 0;
+  };
+}
+
+.title {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.message {
+  color: $white-2;
+  font-size: 21px;
+}

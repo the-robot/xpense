@@ -1,7 +1,146 @@
 @import '../index.scss';
 
+.calculator {
+  &_button {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    // margin and padding
+    margin-right: 35px;
+    margin-top: 5px;
+
+    &_icon {
+      width: 14px;
+    }
+  }
+  @media all and (max-width: $mobile) {
+    &_button {
+      margin-right: 20px;
+    }
+  }
+
+  &_container {
+    padding-bottom: 25px;
+    text-align: left;
+  }
+
+  &_header {
+    position: relative;
+  }
+
+  &_input {
+    &_left {
+      margin-right: 5px;
+    }
+
+    &_right {
+      margin-left: 5px;
+    }
+  }
+
+  &_title {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 5px;
+  }
+
+  input {
+    background-color: $black-2;
+
+    // border
+    border-radius: 10px;
+    border-width: 0;
+
+    // dimension
+    height: 40px;
+    width: 45%;
+
+    // font
+    color: $white-1;
+    font-weight: bold;
+
+    // margin and padding
+    margin-bottom: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  input:focus {
+    border-bottom: 4px solid $black-3;
+    border-right: 4px solid $black-3;
+    outline: none;
+    margin-bottom: 0px;
+  }
+  // to hide arrow button from input type number
+  input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+      /* display: none; <- Crashes Chrome on hover */
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+  input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+  }
+
+  p {
+    margin-top: 0;
+  }
+}
+
 .container {
   // margin and padding
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-left: 20px;
+  margin-right: 20px;
+
+  &_grid {
+    margin-top: 0px;
+  }
+}
+
+.icon {
+  width: 12px;
+
+  // margin and padding
+  margin-bottom: 20px;
+  margin-right: 20px;
+
+  // position
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  &_calculate {
+    @extend .icon;
+    width: 18px;
+  }
+
+  &_dollar {
+    @extend .icon;
+    width: 12px;
+  }
+
+  &_people {
+    @extend .icon;
+    width: 24px;
+  }
+}
+
+.separator {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  height: 1px;
+}
+
+.title {
+  margin-left: 15px;
+  text-align: left;
+
+  p {
+    margin: 0;
+  }
+
+  &_text {
+    font-size: 28px;
+    font-weight: bold;
+  }
 }

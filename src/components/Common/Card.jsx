@@ -4,29 +4,34 @@ import PropTypes from 'prop-types';
 // styling
 import style from '../../styles/components/common/card.scss';
 
-// variables
-import variables from '../../styles/index.scss';
-
 const Card = props => {
-  const { backgroundColor } = props;
+  const { backgroundColor, icon, message, title } = props;
+  const defaultContainerStyle = backgroundColor ? {
+    backgroundColor: backgroundColor,
+  } : {};
 
   return (
-    <div style={{ backgroundColor: backgroundColor }}>
-      <h1> Hello World </h1>
+    <div className={style.container} style={defaultContainerStyle}>
+      <p className={style.title}>{title}</p>
+      {message
+        ? (
+          <p className={style.message}>{message}</p>
+        ) : null}
+      {icon}
     </div>
   );
 };
 
 Card.propTypes = {
-  icon: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
 
   backgroundColor: PropTypes.string,
+  icon: PropTypes.element,
+  message: PropTypes.string,
 };
 
 Card.defaultProps = {
-  backgroundColor: variables.red1
+  backgroundColor: null
 };
 
 export default Card;
