@@ -2,7 +2,7 @@ import React from 'react';
 
 import Calculator from './Calculator';
 import HowTo from './HowTo';
-import style from '../../styles/components/home.scss';
+import style from '../../styles/components/home/index.scss';
 
 const HomeComponent = props => {
   return (

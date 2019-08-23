@@ -8,7 +8,7 @@ import { faEquals, faDollarSign, faUserFriends } from '@fortawesome/free-solid-s
 
 // styling
 import grid from '../../styles/components/grid.scss';
-import style from '../../styles/components/home.scss';
+import style from '../../styles/components/home/index.scss';
 
 // colors
 import variables from '../../styles/index.scss';

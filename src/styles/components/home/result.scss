@@ -1,0 +1,25 @@
+@import '../../index.scss';
+
+@media all and (max-width: $mobile) {
+  .col {
+    width: 50%;
+  }
+}
+
+.button {
+  margin: 0 auto;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 50%;
+}
+
+.container {
+  max-width: 650px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 5px;
+  text-transform: uppercase;
+}

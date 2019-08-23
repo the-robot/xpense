@@ -10,7 +10,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 // styling
 import grid from '../../styles/components/grid.scss';
-import style from '../../styles/components/home.scss';
+import style from '../../styles/components/home/index.scss';
 
 
 class AmountInput extends PureComponent {
@@ -139,8 +139,41 @@ class Calculator extends Component {
         },
       ],
       people: '8',
-      splitExpenses: [],
-      showResult: false,
+      splitExpenses: [
+        {
+          name: 'A',
+          amount: '2.7'
+        },
+        {
+          name: 'B',
+          amount: '3.2'
+        },
+        {
+          name: 'C',
+          amount: '3.5'
+        },
+        {
+          name: 'D',
+          amount: '3.8'
+        },
+        {
+          name: 'E',
+          amount: '5.9'
+        },
+        {
+          name: 'F',
+          amount: '3.7'
+        },
+        {
+          name: 'G',
+          amount: '4.6'
+        },
+        {
+          name: 'H',
+          amount: '3.5'
+        },
+      ],
+      showResult: true,
     };
   }
 
@@ -338,7 +371,12 @@ class Calculator extends Component {
 
     // if show result, hide calculator
     if (showResult) {
-      return <Result />
+      return <Result
+        goBack={() => this.setState({
+          showResult: false,
+        })}
+        expenses={splitExpenses}
+      />
     }
 
     return (
