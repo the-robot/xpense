@@ -386,6 +386,7 @@ class Calculator extends Component {
             {/* No. People */}
             <div className={`${grid.col_sm} ${style.calculator_container}`}>
               <div className={style.calculator_input}>
+                <p className={style.calculator_title}>No. of People</p>
                 <input
                   className={style.calculator_input_people}
                   onChange={evt => setPeople(evt.target.value)}
@@ -401,7 +402,7 @@ class Calculator extends Component {
             {/* Caculate Button */}
             <div
               className={`${grid.col_sm} ${style.calculator_container}`}
-              style={{ paddingTop: 0, paddingLeft: '15px' }}
+              style={{ paddingLeft: '15px' }}
             >
               <Button
                 buttonStyle={style.calculator_calcButton}
@@ -410,12 +411,15 @@ class Calculator extends Component {
                 text={'Split Expenses'}
               />
             </div>
+          </div>
 
+          <div className={grid.row}>
             {/* Result */}
             <div
-              className={grid.fill}
+              className={`${grid.col_sm} ${style.calculator_container}`}
+              style={{ paddingTop: 0, paddingLeft: '15px' }}
             >
-              <p> Hello </p>
+              <p>Calculated Amount</p>
             </div>
           </div>
         </div>
