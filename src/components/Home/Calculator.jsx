@@ -18,47 +18,51 @@ class AmountInput extends PureComponent {
     super(props);
 
     this.state = {
-      value1: props.value1,
-      value2: props.value2,
+      name: props.name,
+      amount: props.amount,
     };
   }
 
-  onInput1Change = value1 => {
+  onNameChange = name => {
     const { setStateInParent } = this;
-    this.setState({ value1 }, setStateInParent);
+    this.setState({ name }, setStateInParent);
   };
 
-  onInput2Change = value2 => {
+  onAmountChange = amount => {
     const { setStateInParent } = this;
-    this.setState({ value2 }, setStateInParent);
+    let amt = amount && amount !== 0 ? parseFloat(amount, 10) : 0;
+    if (amt <= 0) {
+      amt = '';
+    }
+    this.setState({ amount: amt }, setStateInParent);
   };
 
   setStateInParent = () => {
-    const { value1, value2 } = this.state;
+    const { name, amount } = this.state;
     const { index, setBack } = this.props;
-    setBack(index, value1, value2);
+    setBack(index, name, amount);
   };
 
   render() {
-    const { onInput1Change, onInput2Change } = this;
-    const { value1, value2 } = this.state;
+    const { onNameChange, onAmountChange } = this;
+    const { name, amount } = this.state;
     const { field1, field2 } = this.props;
 
     return (
       <div className={style.calculator_input}>
         <input
           className={style.calculator_input_left}
-          onChange={evt => onInput1Change(evt.target.value)}
+          onChange={evt => onNameChange(evt.target.value)}
           placeholder={field1.placeholder}
           type={field1.type}
-          value={value1}
+          value={name}
         />
         <input
           className={style.calculator_input_right}
-          onChange={evt => onInput2Change(evt.target.value)}
+          onChange={evt => onAmountChange(evt.target.value)}
           placeholder={field2.placeholder}
           type={field2.type}
-          value={value2}
+          value={amount}
         />
       </div>
     );
@@ -77,11 +81,11 @@ AmountInput.propTypes = {
   }).isRequired,
   setBack: PropTypes.func.isRequired,
 
-  value1: PropTypes.oneOfType([
+  name: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
   ]),
-  value2: PropTypes.oneOfType([
+  amount: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
   ]),
@@ -177,8 +181,12 @@ class Calculator extends Component {
   };
 
   setPeople = value => {
+    let ppl = value && value !== 0 ? parseInt(value) : 0;
+    if (ppl <= 0) {
+      ppl = '';
+    }
     this.setState({
-      people: value,
+      people: ppl,
     });
   };
 
@@ -251,7 +259,6 @@ class Calculator extends Component {
     // Button State
     const disabledCalc = !(
       people &&
-      people.trim() &&
       Number.isInteger(parseInt(people)) &&
       parseInt(people) > 0
     );
@@ -277,8 +284,8 @@ class Calculator extends Component {
         field1={field1}
         field2={field2}
         setBack={setIndvExpense}
-        value1={input.name}
-        value2={input.amount}
+        name={input.name}
+        amount={input.amount}
       />;
     });
     const GroupExpenses = groupExpenses.map((input, index) => {
@@ -296,8 +303,8 @@ class Calculator extends Component {
         field1={field1}
         field2={field2}
         setBack={setGroupExpense}
-        value1={input.name}
-        value2={input.amount}
+        name={input.name}
+        amount={input.amount}
       />;
     });
     const Promos = promos.map((input, index) => {
@@ -315,8 +322,8 @@ class Calculator extends Component {
         field1={field1}
         field2={field2}
         setBack={setPromo}
-        value1={input.name}
-        value2={input.amount}
+        name={input.name}
+        amount={input.amount}
       />;
     });
 
