@@ -2,6 +2,7 @@ import Head from 'next/head';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import Credit from '../Credit';
 import Header from '../Header';
 
 // styling
@@ -15,6 +16,7 @@ const DefaultLayout = ({children}) => (
     </Head>
 
     <Header/>
+    <Credit />
 
     <div  className={style.container}>
       {children}

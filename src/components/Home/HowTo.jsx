@@ -25,7 +25,7 @@ const HowTo = props => {
           <div className={grid.col_sm}>
             <Card
               title={'Enter Amount'}
-              backgroundColor={variables['colors-grey2']}
+              backgroundColor={variables['colors-pink1']}
               icon={
                 <FontAwesomeIcon
                   className={style.icon_dollar}
@@ -38,7 +38,7 @@ const HowTo = props => {
           <div className={grid.col_sm}>
             <Card
               title={'Enter No. of Ppl'}
-              backgroundColor={variables['colors-blue3']}
+              backgroundColor={variables['colors-yellow2']}
               icon={
                 <FontAwesomeIcon
                   className={style.icon_people}
@@ -51,7 +51,7 @@ const HowTo = props => {
           <div className={grid.col_sm}>
             <Card
               title={'Calculate'}
-              backgroundColor={variables['colors-pink1']}
+              backgroundColor={variables['colors-blue3']}
               icon={
                 <FontAwesomeIcon
                   className={style.icon_calculate}

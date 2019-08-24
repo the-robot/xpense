@@ -20,7 +20,7 @@ body {
   background-color: $grey-1;
   color: $white-1;
   margin: 0;
-  margin-bottom: 50px;
+  padding-bottom: 50px;
 
   // disable selection
   -webkit-touch-callout: none;
@@ -79,6 +79,7 @@ body {
 
     // yellow
     yellow1: $yellow-1;
+    yellow2: $yellow-2;
 
     // pink
     pink1: $pink-1;

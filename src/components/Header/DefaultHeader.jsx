@@ -8,7 +8,8 @@ const Header = () => {
     <React.Fragment>
       <div className={style.container}>
         <div className={style.title}>
-          <p className={style.title_name}> Xpense </p>
+          <p className={style.title_name}>
+            <font className={style.title_highlight}>X</font>pense </p>
         </div>
       </div>
     </React.Fragment>
