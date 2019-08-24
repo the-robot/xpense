@@ -195,14 +195,14 @@ class Calculator extends Component {
     // calculate group expenses total
     let gpExpTotal = 0;
     for (let i = 0; i < groupExpenses.length; i += 1) {
-      gpExpTotal += groupExpenses[i].amount && groupExpenses[i].amount.trim() ? parseFloat(groupExpenses[i].amount) : 0;
+      gpExpTotal += groupExpenses[i].amount ? parseFloat(groupExpenses[i].amount) : 0;
     }
     // calculate promo total
     let promoAmt = 0;
     for (let i = 0; i < promos.length; i += 1) {
-      promoAmt += promos[i].amount && promos[i].amount.trim() ? parseFloat(promos[i].amount) : 0;
+      promoAmt += promos[i].amount ? parseFloat(promos[i].amount) : 0;
     }
-    const ppl = people && people.trim() ? parseInt(people) : 1;
+    const ppl = people ? parseInt(people) : 1;
 
     // do calculation
     const gpExpAftSplit = gpExpTotal / ppl;
@@ -217,7 +217,7 @@ class Calculator extends Component {
     }).map(input => {
       // store total amount
       // if negative, set to 0
-      let amt = input.amount && input.amount.trim() ? parseFloat(input.amount) + gpExpAftSplit - promoAmtAftSplit : 0
+      let amt = input.amount ? parseFloat(input.amount) + gpExpAftSplit - promoAmtAftSplit : 0
       amt = amt < 0 ? 0 : amt;
       totalAmt += amt
       return {
@@ -258,9 +258,13 @@ class Calculator extends Component {
 
     // Button State
     const disabledCalc = !(
+      // no. of ppl must have
       people &&
       Number.isInteger(parseInt(people)) &&
-      parseInt(people) > 0
+      parseInt(people) > 0 &&
+
+      // individual expenses must have
+      indvExpenses.length > 0 && indvExpenses[0].amount
     );
   
     // Icon
