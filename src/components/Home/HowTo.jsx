@@ -4,7 +4,7 @@ import { Card } from '../Common';
 
 // icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEquals, faDollarSign, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { faEquals, faDollarSign, faBiking } from '@fortawesome/free-solid-svg-icons';
 
 // styling
 import grid from '../../styles/components/grid.scss';
@@ -24,7 +24,7 @@ const HowTo = props => {
         <div className={grid.row}>
           <div className={grid.col_sm}>
             <Card
-              title={'Enter Amount'}
+              title={"Item's Price"}
               backgroundColor={variables['colors-pink1']}
               icon={
                 <FontAwesomeIcon
@@ -37,12 +37,12 @@ const HowTo = props => {
 
           <div className={grid.col_sm}>
             <Card
-              title={'Enter No. of Ppl'}
+              title={'Delivery / Promo'}
               backgroundColor={variables['colors-yellow2']}
               icon={
                 <FontAwesomeIcon
-                  className={style.icon_people}
-                  icon={faUserFriends}
+                  className={style.icon_delivery}
+                  icon={faBiking}
                 />
               }
             />

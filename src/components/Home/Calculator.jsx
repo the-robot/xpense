@@ -108,7 +108,6 @@ class Calculator extends Component {
         name: '',
         amount: '',
       }],
-      people: '',
       splitExpenses: [],
       showResult: false,
     };
@@ -180,18 +179,8 @@ class Calculator extends Component {
     this.setState({ promos });
   };
 
-  setPeople = value => {
-    let ppl = value && value !== 0 ? parseInt(value) : 0;
-    if (ppl <= 0) {
-      ppl = '';
-    }
-    this.setState({
-      people: ppl,
-    });
-  };
-
   calculate = () => {
-    const { indvExpenses, groupExpenses, promos, people } = this.state;
+    const { indvExpenses, groupExpenses, promos } = this.state;
     // calculate group expenses total
     let gpExpTotal = 0;
     for (let i = 0; i < groupExpenses.length; i += 1) {
@@ -202,11 +191,11 @@ class Calculator extends Component {
     for (let i = 0; i < promos.length; i += 1) {
       promoAmt += promos[i].amount ? parseFloat(promos[i].amount) : 0;
     }
-    const ppl = people ? parseInt(people) : 1;
+    const totalItems = indvExpenses.length > 0 ? indvExpenses.length : 1;
 
     // do calculation
-    const gpExpAftSplit = gpExpTotal / ppl;
-    const promoAmtAftSplit = promoAmt / ppl;
+    const gpExpAftSplit = gpExpTotal / totalItems;
+    const promoAmtAftSplit = promoAmt / totalItems;
     let totalAmt = 0;
     // filter empty records, then calculate
     let indvAftSplit = indvExpenses.filter(input => {
@@ -244,13 +233,11 @@ class Calculator extends Component {
       setIndvExpense,
       setGroupExpense,
       setPromo,
-      setPeople,
       calculate,
     } = this;
     const {
       groupExpenses,
       indvExpenses,
-      people,
       promos,
       showResult,
       splitExpenses
@@ -258,11 +245,6 @@ class Calculator extends Component {
 
     // Button State
     const disabledCalc = !(
-      // no. of ppl must have
-      people &&
-      Number.isInteger(parseInt(people)) &&
-      parseInt(people) > 0 &&
-
       // individual expenses must have
       indvExpenses.length > 0 && indvExpenses[0].amount
     );
@@ -389,25 +371,6 @@ class Calculator extends Component {
                       />
                     </div>
                     {Promos}
-                  </div>
-                </div>
-
-                {/* No. of People */}
-                <div className={grid.row}>
-                  <div
-                    className={`${grid.col_lg} ${style.calculator_container}`}
-                    style={{ paddingTop: 0, marginTop: '-1px' }}
-                  >
-                    <div className={style.calculator_input}>
-                      <p className={style.calculator_title}>No. of Ppl</p>
-                      <input
-                        className={style.calculator_input_people}
-                        onChange={evt => setPeople(evt.target.value)}
-                        placeholder={'no. of ppl'}
-                        type='number'
-                        value={people}
-                      />
-                    </div>
                   </div>
                 </div>
               </div>

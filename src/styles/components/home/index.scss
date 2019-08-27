@@ -55,22 +55,6 @@
     &_right {
       margin-left: 5px;
     }
-
-    &_people {
-      // half col width
-      width: 45% !important;
-      // full col width
-      // width: 96.5% !important;
-      display: block;
-    }
-    &_people:focus {
-      margin-bottom: 12px !important;
-    }
-    @media all and (max-width: $mobile) {
-      &_people {
-        width: 100% !important;
-      }
-    }
   }
 
   &_title {
@@ -163,9 +147,9 @@
     width: 12px;
   }
 
-  &_people {
+  &_delivery {
     @extend .icon;
-    width: 24px;
+    width: 28px;
   }
 }
 
